@@ -1,10 +1,51 @@
-<?php 
-	$main_app_name = "Dummy application";
-	$main_app_build = "1.0";
-	$main_app_avg_rating = "4.0";
-	$main_app_last_update_at = "15th December, 2015"; 
+<?php
 
-?><!DOCTYPE html>
+require_once './inc/database.class.php';
+
+
+$db = new Database;
+
+$likes =0;
+$dislikes=0;
+
+
+if(isset($_GET['id']))
+{
+  $id = $_GET['id'];
+}
+else
+{
+  $id = 'com.Slack';
+}
+
+function display($id, $type)
+{
+  $db = new Database;
+
+  $res = $db->query($id, $type);
+
+  foreach($res as $r)
+  {
+    echo "<ul>";
+    echo "<li> {$r['comment']} </li>";
+    echo "</ul>";
+  }
+}
+
+$senti = $db->senti($id);
+
+$profile = $db->profile($id);
+$profile = $profile[0];
+
+
+
+	$main_app_name = $id;
+	$main_app_build = "";
+	$main_app_avg_rating = $profile['rating'];
+	$main_app_last_update_at = $profile['last_update'];
+
+?>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -58,12 +99,16 @@
 		      <ul class="nav navbar-nav navbar-right">
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Top apps <span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="#">Category 1</a></li>
-		            <li><a href="#">Category 2</a></li>
-		            <li><a href="#">Category 3</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#">Separated link</a></li>
+	          <ul class="dropdown-menu">
+<?php
+	$appIds = $db->appIds();
+foreach($appIds as $appId)
+{
+?>
+		            <li><a href="./?id=<?php echo $appId['app_id']; ?>"><?php echo $appId['app_id']; ?></a></li>
+<?php
+}
+?>
 		          </ul>
 		        </li>
 		      </ul>
@@ -79,7 +124,7 @@
 
 		<div class="app-main clearfix col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
 			<div class="main-app-img">
-      	<img src="images/geforce.png" class="main-app-img">
+      	<img height="100" width="100" src="<?php echo $profile['icon']; ?>" class="main-app-img">
 			</div>
 			<div class="main-app-details table-responsive">
 				<h2><?php echo $main_app_name; ?></h2>
@@ -97,18 +142,18 @@
 						<td><?php echo $main_app_last_update_at; ?></td>
 					</tr>
 				</table>
-				
+
 			</div>
-		</div>	
-		<div class="sentiment-icons clearfix">
-		  <span class="col-sm-4 col-lg-offset-1 col-lg-3 fa fa-thumbs-o-up fa-5x"></span>
-		  <span class="col-sm-4 col-lg-4 fa fa-exclamation fa-5x"></span>
-		  <span class="col-sm-4 col-lg-3 fa fa-thumbs-o-down fa-5x"></span>
 		</div>
-		<div class="graph">
+		<div class="sentiment-icons clearfix">
+		  <span class="col-sm-4 col-lg-offset-1 col-lg-3 fa fa-thumbs-o-up fa-5x" style="opacity: <?php echo $likes; ?>"></span>
+		  <!-- <span class="col-sm-4 col-lg-4 fa fa-exclamation fa-5x"></span> -->
+		  <span class="col-sm-4 col-lg-3 fa fa-thumbs-o-down fa-5x" style="opacity: <?php echo $dislikes; ?>"></span>
+		</div>
+		<!-- <div class="graph">
 			<h4><i>Graph</i></h4>
 			<hr>
-		</div>
+		</div> -->
 		<!-- <div class="comments-nav">
 			<ul class="nav nav-tabs">
 			  <li role="presentation" class="active" id="tab1">
@@ -129,29 +174,26 @@
 		<div class="comments-nav">
 
 		  <!-- Nav tabs -->
-		  <ul class="nav nav-tabs" role="tablist">
+		  <!-- <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Likes</a></li>
 		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Dislikes</a></li>
 		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Spam</a></li>
-		  </ul>
+		  </ul> -->
 
 		  <!-- Tab panes -->
-		  <div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="home">
-		    	Like comments here:
-		    	<ul>
-		    		<li>Wow! This app is <span class="highlighted"> awesome</span>!!!</li>
-		    		<li>Daamiiiii!!!!</li>
-		    		<li> Very fast loading and rendering!</li>
-		    		<li> Great app!<span class="highlighted"> awesome</span> </li>
-		    	</ul>
-		    </div>
-		    <div role="tabpanel" class="tab-pane" id="profile">
-		    	Dislike comments here
-		    </div>
-		    <div role="tabpanel" class="tab-pane" id="messages">
-		    	And all the spams go.. here!
-		    </div>
+		  <!-- <div class="tab-content"> -->
+		    <!-- <div role="tabpanel" class="tab-pane active" id="home"> -->
+        <h3>Likes</h3>
+						<?php display($id, 'TRUE'); ?>
+		    <!-- </div> -->
+		    <!-- <div role="tabpanel" class="tab-pane" id="profile"> -->
+          <h3>Dislikes</h3>
+						<?php display($id, 'FALSE'); ?>
+		    <!-- </div> -->
+		    <!-- <div role="tabpanel" class="tab-pane" id="messages"> -->
+        <h3>Spam</h3>
+						<?php display($id, 'SPAM'); ?>
+		    <!-- </div> -->
 		  </div>
 
 		</div>
@@ -163,7 +205,7 @@
 					<img src="images/github-32.png">
 				</span>
 			</h4>
-			
+
 		</div>
 	</div>
 
