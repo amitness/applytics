@@ -127,7 +127,7 @@ foreach($appIds as $appId)
       	<img height="100" width="100" src="<?php echo $profile['icon_url']; ?>" class="main-app-img">
 			</div>
 			<div class="main-app-details table-responsive">
-				<h2><?php echo $main_app_name; ?></h2>
+				<h2><?php echo $profile["appname"]; ?></h2>
 				<table class="table table-hover">
 					<tr>
 						<td>Build:</td>
