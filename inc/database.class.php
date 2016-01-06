@@ -41,7 +41,7 @@ class Database
     public function appIds()
     {
         try {
-          $sql = 'SELECT app_id FROM comments GROUP BY app_id';
+          $sql = 'SELECT appname, appid FROM app';
           $stmt = $this->_db->prepare($sql);
           $stmt->execute();
           return  $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,7 +54,7 @@ class Database
     public function profile($id)
     {
         try {
-          $sql = 'SELECT * FROM app WHERE app_id=?';
+          $sql = 'SELECT * FROM app WHERE appid=?';
           $stmt = $this->_db->prepare($sql);
           $stmt->bindValue(1, $id, PDO::PARAM_STR);
           $stmt->execute();

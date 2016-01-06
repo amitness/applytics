@@ -41,7 +41,7 @@ $profile = $profile[0];
 
 	$main_app_name = $id;
 	$main_app_build = "";
-	$main_app_avg_rating = $profile['rating'];
+	$main_app_avg_rating = $profile['average_rating'];
 	$main_app_last_update_at = $profile['last_update'];
 
 ?>
@@ -105,7 +105,7 @@ $profile = $profile[0];
 foreach($appIds as $appId)
 {
 ?>
-		            <li><a href="./?id=<?php echo $appId['app_id']; ?>"><?php echo $appId['app_id']; ?></a></li>
+		            <li><a href="./?id=<?php echo $appId['appid']; ?>"><?php echo $appId['appname']; ?></a></li>
 <?php
 }
 ?>
@@ -124,7 +124,7 @@ foreach($appIds as $appId)
 
 		<div class="app-main clearfix col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
 			<div class="main-app-img">
-      	<img height="100" width="100" src="<?php echo $profile['icon']; ?>" class="main-app-img">
+      	<img height="100" width="100" src="<?php echo $profile['icon_url']; ?>" class="main-app-img">
 			</div>
 			<div class="main-app-details table-responsive">
 				<h2><?php echo $main_app_name; ?></h2>
