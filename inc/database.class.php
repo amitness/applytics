@@ -69,7 +69,7 @@ class Database
     {
       global $likes;
       global $dislikes;
-
+        
         try {
           $sql = 'SELECT sentiment, count(app_id) AS cnt FROM comments WHERE app_id=? GROUP BY app_id';
           $stmt = $this->_db->prepare($sql);

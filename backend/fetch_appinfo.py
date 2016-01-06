@@ -9,6 +9,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')  # Sets the encoding for nepali
 
+# Read the appids from file
 with open('appids.txt') as file:
     f = file.read()
 
@@ -16,7 +17,7 @@ appids = f.splitlines()
 
 # Create headers for csv
 ofile = open('appdata.csv', 'a')
-ofile.write('appid,icon url,category,last update,average rating,people count,rating one,rating two,rating three,rating four,rating five,website url,email,downloads,price\n')
+ofile.write('appname,appid,icon url,category,last update,average rating,people count,rating one,rating two,rating three,rating four,rating five,website url,email,downloads,price\n')
 ofile.close()
 
 # appurl = 'https://play.google.com/store/apps/details?id=com.facebook.katana'
@@ -31,6 +32,10 @@ for appurl in appids:
     # Find app id
     pos = appurl.find('id=')
     appid = appurl[pos + 3:]
+
+    # App name
+    appname = soup.find('div', {'class': 'id-app-title'}).text
+    print appname
 
     # App Icon
     icon = soup.find('img', {'class': 'cover-image'})
@@ -54,11 +59,11 @@ for appurl in appids:
 
     # 1,2,3,4,5 star count
     ratings = soup.findAll('span', {'class': 'bar-number'})
-    ratingone = ratings[0].text
-    ratingtwo = ratings[1].text
-    ratingthree = ratings[2].text
-    ratingfour = ratings[3].text
-    ratingfive = ratings[4].text
+    ratingone = ratings[0].text.replace(",","")
+    ratingtwo = ratings[1].text.replace(",","")
+    ratingthree = ratings[2].text.replace(",","")
+    ratingfour = ratings[3].text.replace(",","")
+    ratingfive = ratings[4].text.replace(",","")
 
     # Developer Website
     linkdivs = soup.findAll('a', {'class': 'dev-link'})
@@ -87,5 +92,5 @@ for appurl in appids:
     print price
 
     ofile = open('appdata.csv', 'a')
-    ofile.write('"'+appid+'","'+iconsrc+'","'+category+'","'+lastupdate+'",'+averagerating+','+peoplecount+','+ratingone+','+ratingtwo+','+ratingthree+','+ratingfour+','+ratingfive+',"'+websiteurl+'","'+email+'",'+downloads+","+price+'\n')
+    ofile.write('"'+appname+'","'+appid+'","'+iconsrc+'","'+category+'","'+lastupdate+'",'+averagerating+',"'+peoplecount+'",'+ratingone+','+ratingtwo+','+ratingthree+','+ratingfour+','+ratingfive+',"'+websiteurl+'","'+email+'","'+downloads+'",'+price+'\n')
     ofile.close()
