@@ -83,11 +83,11 @@ class Database
             if ($res['sentiment'] == 'TRUE')
             {
               $likes = 1;
-              $dislikes = 0.1;
+              $dislikes = 0.3;
             }
             else
             {
-              $likes = 0.1;
+              $likes = 0.3;
               $dislikes = 1;
             }
           }
