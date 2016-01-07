@@ -205,7 +205,7 @@ foreach($appIds as $appId)
 			<h4>Developed at Hackclash
 				<span class="pull-right git-icon">
 					<!-- <img src= github icon> -->
-					<img src="images/github-32.png">
+					<a href="https://github.com/studenton/applytics"><img src="images/github-32.png"></a>
 				</span>
 			</h4>
 		</div>
