@@ -1,4 +1,5 @@
 h1{margin: 20px 100px;}
+h2{margin: 20px 20px;}
 
 body{margin-bottom: 10px;}
 
@@ -7,7 +8,7 @@ body{margin-bottom: 10px;}
 	max-width       :1200px;
 	min-height      :95vh;
 	/*min-height    :1000px;  Just for testing */
-	background-color:white;
+	background-color:#f8f8ff;
 	border-radius: 5px;
 	box-shadow: 0px 5px 15px 5px #888888;
 }
@@ -54,13 +55,14 @@ img.main-app-img{
 	max-width: 300px;
 }
 
-span.fa {padding: 10px;}
+span.materialshift {padding: 10px;}
 
 span.git-icon{margin:0px 5px 10px;}
 
-span.fa-thumbs-o-up{color:green;}
+span.materialgreen{color:#4CAF50;}
 span.fa-exclamation{color:orange;}
-span.fa-thumbs-o-down{color:red;}
+span.materialred{color:#EF5350;}
+
 
 div.graph{
 	border: 1px solid lightgrey;
@@ -102,3 +104,9 @@ div.comments-nav, div.graph{
   margin-left: auto;}
 }
 
+
+// Rules for sizing the icon.
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

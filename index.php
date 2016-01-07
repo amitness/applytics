@@ -52,54 +52,54 @@ $profile = $profile[0];
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+ <!-- Material Design fonts -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Bootstrap -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+   <!-- Bootstrap Material Design -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/css/bootstrap-material-design.css" rel="stylesheet">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.7/css/ripples.css" rel="stylesheet">
+
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-	<link href="css/style.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 
 	<title> Applytics </title>
 </head>
 <body>
 	<div class="container">
-		<!-- # Bootstrap navbar -->
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#">Applytics</a>
-		    </div>
+<!-- # Bootstrap navbar -->
+		<div class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:void(0)">Applytics</a>
+              </div>
+              <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="javascript:void(0)">Home<div class="ripple-container"></div></a></li>
+                  <li><a href="javascript:void(0)">About</a></li>
 
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <!-- <ul class="nav navbar-nav">
-		        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-		        <li><a href="#">Link</a></li>
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="#">Action</a></li>
-		            <li><a href="#">Another action</a></li>
-		            <li><a href="#">Something else here</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#">Separated link</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#">One more separated link</a></li>
-		          </ul>
-		        </li>
-		      </ul> -->
-
-
-		      <ul class="nav navbar-nav navbar-right">
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Top apps <span class="caret"></span></a>
-	          <ul class="dropdown-menu">
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left">
+                  <div class="form-group is-empty">
+                    <input type="text" class="form-control col-md-8" placeholder="Search apps">
+                  <span class="material-input"></span></div>
+                </form>
+                  <li class="dropdown">
+                    <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Top Apps
+                      <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
 <?php
 	$appIds = $db->appIds();
 foreach($appIds as $appId)
@@ -112,17 +112,14 @@ foreach($appIds as $appId)
 		          </ul>
 		        </li>
 		      </ul>
-		      <form class="navbar-form navbar-right" role="search">
-		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Search apps">
-		        </div>
-		        <button type="submit" class="btn btn-default">Go</button>
-		      </form>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</nav>
-
-		<div class="app-main clearfix col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </nav>
+<!--Navbar finish-->
+		<div class="app-main clearfix col-sm-offset-1 col-md-offset-2 col-lg-offset-3 comments-nav jumbotron">
 			<div class="main-app-img">
       	<img height="100" width="100" src="<?php echo $profile['icon_url']; ?>" class="main-app-img">
 			</div>
@@ -130,8 +127,20 @@ foreach($appIds as $appId)
 				<h2><?php echo $profile["appname"]; ?></h2>
 				<table class="table table-hover">
 					<tr>
-						<td>Build:</td>
-						<td><?php echo $main_app_build; ?></td>
+						<td>Category:</td>
+						<td><?php echo $profile["category"] ?></td>
+					</tr>
+					<tr>
+						<td>Total Downloads:</td>
+						<td><?php echo $profile["downloads"] ?></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><a href="mailto:<?php echo $profile["email"] ?>"><?php echo $profile["email"] ?></a></td>
+					</tr>
+					<tr>
+						<td>Website:</td>
+						<td><a href="<?php echo $profile["website_url"] ?>">url</a></td>
 					</tr>
 					<tr>
 						<td>Average rating:</td>
@@ -142,13 +151,33 @@ foreach($appIds as $appId)
 						<td><?php echo $main_app_last_update_at; ?></td>
 					</tr>
 				</table>
-
 			</div>
-		</div>
-		<div class="sentiment-icons clearfix">
-		  <span class="col-sm-4 col-lg-offset-1 col-lg-3 fa fa-thumbs-o-up fa-5x" style="opacity: <?php echo $likes; ?>"></span>
+					<div class="sentiment-icons clearfix ">
+		  <span class="col-sm-4 col-lg-offset-2 col-lg-3 materialgreen materialshift" style="opacity: <?php echo $likes; ?>"><i class="material-icons md-48">thumb_up</i></span>
 		  <!-- <span class="col-sm-4 col-lg-4 fa fa-exclamation fa-5x"></span> -->
-		  <span class="col-sm-4 col-lg-3 fa fa-thumbs-o-down fa-5x" style="opacity: <?php echo $dislikes; ?>"></span>
+		  <span class="col-sm-4 col-lg-3 materialred materialshift" style="opacity: <?php echo $dislikes; ?>"><i class="material-icons md-48">thumb_down</i></span>
+		</div>
+				  <ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Likes</a></li>
+		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Dislikes</a></li>
+		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Spam</a></li>
+		  </ul>
+
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane active" id="home">
+        <h3>Likes</h3>
+						<?php display($id, 'TRUE'); ?>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="profile">
+          <h3>Dislikes</h3>
+						<?php display($id, 'FALSE'); ?>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="messages">
+        <h3>Spam</h3>
+						<?php display($id, 'SPAM'); ?>
+		    </div>
+		  </div>
 		</div>
 		<!-- <div class="graph">
 			<h4><i>Graph</i></h4>
@@ -171,43 +200,15 @@ foreach($appIds as $appId)
 			</ul>
 		</div> -->
 
-		<div class="comments-nav">
-
-		  <!-- Nav tabs -->
-		  <!-- <ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Likes</a></li>
-		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Dislikes</a></li>
-		    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Spam</a></li>
-		  </ul> -->
-
-		  <!-- Tab panes -->
-		  <!-- <div class="tab-content"> -->
-		    <!-- <div role="tabpanel" class="tab-pane active" id="home"> -->
-        <h3>Likes</h3>
-						<?php display($id, 'TRUE'); ?>
-		    <!-- </div> -->
-		    <!-- <div role="tabpanel" class="tab-pane" id="profile"> -->
-          <h3>Dislikes</h3>
-						<?php display($id, 'FALSE'); ?>
-		    <!-- </div> -->
-		    <!-- <div role="tabpanel" class="tab-pane" id="messages"> -->
-        <h3>Spam</h3>
-						<?php display($id, 'SPAM'); ?>
-		    <!-- </div> -->
-		  </div>
-
-		</div>
 		<hr>
 		<div class="footer">
-			<h4>Developed at Hackclash 2016
+			<h4>Developed at Hackclash
 				<span class="pull-right git-icon">
 					<!-- <img src= github icon> -->
 					<img src="images/github-32.png">
 				</span>
 			</h4>
-
 		</div>
 	</div>
-
 </body>
 </html>
