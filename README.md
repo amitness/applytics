@@ -1,7 +1,7 @@
 # Applytics
 Sentiment Analysis of Your App
 
-We developed this project in a hackathon to perform sentiment analysis on reviews of mobile apps on Google Playstore. The key idea was to identify negative reviews quicker so to avoid user churn.
+We developed this project in a hackathon to perform sentiment analysis on reviews of mobile apps on Google Playstore. The key idea was to identify negative reviews quicker so as to avoid user churn.
 
 ### Training Data:
 We scraped reviews of 23 popular mobile apps and manually labelled each data as positive or negative to create the dataset.
